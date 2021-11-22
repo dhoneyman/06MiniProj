@@ -12,3 +12,18 @@ fetch(stockURL)
 }
 
 stockTicker();
+ 
+
+function getNews() {
+    let newsURL = "https://newsapi.org/v2/everything?q=Apple&from=2021-11-22&sortBy=popularity&apiKey=4006b214723948e4b3892305ad633ff0";
+    
+    fetch(newsURL) 
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (newsURL) {
+        console.log(newsURL)
+
+    })
+}
+getNews();
