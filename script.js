@@ -15,7 +15,7 @@ stockTicker();
  
 
 function getNews() {
-    let newsURL = "https://newsapi.org/v2/everything?q=Apple&from=2021-11-22&sortBy=popularity&apiKey=4006b214723948e4b3892305ad633ff0";
+    let newsURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=dqDiEwjATABt4rNeLEmrYjgPHHj7nXd7";
     
     fetch(newsURL) 
     .then(function (response) {
