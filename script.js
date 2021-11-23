@@ -22,3 +22,19 @@ fetch(stockURL)
 // }).then(res => res.json()).then(data => {
 //   console.log(data)
 // })
+stockTicker();
+ 
+
+function getNews() {
+    let newsURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=dqDiEwjATABt4rNeLEmrYjgPHHj7nXd7";
+    
+    fetch(newsURL) 
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (newsURL) {
+        console.log(newsURL)
+
+    })
+}
+getNews();
