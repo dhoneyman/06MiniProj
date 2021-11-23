@@ -16,13 +16,20 @@ fetch(stockURL)
 })
     .then(function (stockResults) {
         let tsdObj = stockResults['Time Series (Daily)'];
+        console.log(stockResults);
+        console.log(tsdObj);
         let objArray = Object.entries(tsdObj);
         let currentIndex = objArray[0];
-        console.log(stockResults);
+        let yesterIndex = objArray[1];
+        console.log(objArray);
+        console.log(yesterIndex);
+        // console.log(stockResults);
 
         stockName.textContent = stockResults['Meta Data']['2. Symbol'];
         curOpen.textContent = currentIndex['1']["1. open"];
         curClose.textContent = currentIndex['1']["4. close"];
+        prevOpen.textContent = yesterIndex['1']["1. open"];
+        prevClose.textContent = yesterIndex['1']["4. close"];
         // stockName.textContent = currentIndex['1']["1. open"];
         // stockName.textContent = currentIndex['1']["1. open"];
         // stockName.textContent = currentIndex['1']["1. open"];
@@ -52,7 +59,7 @@ function getNews() {
         return response.json();
     })
     .then(function (newsObj) {
-        console.log(newsObj)
+        // console.log(newsObj)
 
     })
 }
