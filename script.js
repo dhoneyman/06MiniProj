@@ -12,13 +12,13 @@ fetch(stockURL)
 } )
 }
 
+//assisted
+// $('#stock-btn').on('click',stockTicker)
 
-$('#stock-btn').on('click',stockTicker)
-
-let search = "tesco"
-let apikey = "VZYUMVJFAC3AIYQG"
-fetch("https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + search + "&apikey=" + apikey, {
-  headers: {"User-Agent": "request"}
-}).then(res => res.json()).then(data => {
-  console.log(data)
-})
+// let search = "tesco"
+// let apikey = "VZYUMVJFAC3AIYQG"
+// fetch("https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + search + "&apikey=" + apikey, {
+//   headers: {"User-Agent": "request"}
+// }).then(res => res.json()).then(data => {
+//   console.log(data)
+// })
