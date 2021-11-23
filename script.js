@@ -1,19 +1,38 @@
+let stockName = document.querySelector('#stock-name');
+let curOpen = document.querySelector('#cur-open');
+let curClose = document.querySelector('#cur-close');
+let prevOpen = document.querySelector('#prev-open');
+let prevClose = document.querySelector('#prev-close');
+
+
+
 function stockTicker(){
     let stockSearch = document.querySelector('#stock-search').value;
-    let stockURL = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockSearch}&interval=5min&apikey=VZYUMVJFAC3AIYQG`;
+    let stockURL = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSearch}&interval=5min&apikey=VZYUMVJFAC3AIYQG`;
 
 fetch(stockURL)
     .then(function (responce) {
       return responce.json();
 })
     .then(function (stockResults) {
-        console.log(stockResults)
+        let tsdObj = stockResults['Time Series (Daily)'];
+        let objArray = Object.entries(tsdObj);
+        let currentIndex = objArray[0];
+        console.log(stockResults);
+
+        stockName.textContent = stockResults['Meta Data']['2. Symbol'];
+        curOpen.textContent = currentIndex['1']["1. open"];
+        curClose.textContent = currentIndex['1']["4. close"];
+        // stockName.textContent = currentIndex['1']["1. open"];
+        // stockName.textContent = currentIndex['1']["1. open"];
+        // stockName.textContent = currentIndex['1']["1. open"];
+        
 
 } )
 }
 
-//assisted
-// $('#stock-btn').on('click',stockTicker)
+// assisted
+$('#stock-btn').on('click',stockTicker)
 
 // let search = "tesco"
 // let apikey = "VZYUMVJFAC3AIYQG"
@@ -22,7 +41,7 @@ fetch(stockURL)
 // }).then(res => res.json()).then(data => {
 //   console.log(data)
 // })
-stockTicker();
+// stockTicker();
  
 
 function getNews() {
@@ -32,8 +51,8 @@ function getNews() {
     .then(function (response) {
         return response.json();
     })
-    .then(function (newsURL) {
-        console.log(newsURL)
+    .then(function (newsObj) {
+        console.log(newsObj)
 
     })
 }
