@@ -1,14 +1,24 @@
 function stockTicker(){
-    let stockURL = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=VZYUMVJFAC3AIYQG';
+    let stockSearch = document.querySelector('#stock-search').value;
+    let stockURL = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockSearch}&interval=5min&apikey=VZYUMVJFAC3AIYQG`;
 
 fetch(stockURL)
     .then(function (responce) {
       return responce.json();
 })
-    .then(function (stockTicker) {
-        console.log(stockTicker)
+    .then(function (stockResults) {
+        console.log(stockResults)
 
 } )
 }
 
-stockTicker();
+
+$('#stock-btn').on('click',stockTicker)
+
+let search = "tesco"
+let apikey = "VZYUMVJFAC3AIYQG"
+fetch("https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + search + "&apikey=" + apikey, {
+  headers: {"User-Agent": "request"}
+}).then(res => res.json()).then(data => {
+  console.log(data)
+})
