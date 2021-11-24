@@ -3,6 +3,7 @@ let curOpen = document.querySelector('#cur-open');
 let curClose = document.querySelector('#cur-close');
 let prevOpen = document.querySelector('#prev-open');
 let prevClose = document.querySelector('#prev-close');
+let delta = document.querySelector('#per-change');
 
 
 
@@ -30,12 +31,17 @@ fetch(stockURL)
         curClose.textContent = currentIndex['1']["4. close"];
         prevOpen.textContent = yesterIndex['1']["1. open"];
         prevClose.textContent = yesterIndex['1']["4. close"];
+        delta.textContent = perChange(currentIndex['1']["1. open"], yesterIndex['1']["1. open"])
         // stockName.textContent = currentIndex['1']["1. open"];
         // stockName.textContent = currentIndex['1']["1. open"];
         // stockName.textContent = currentIndex['1']["1. open"];
         
 
 } )
+}
+
+function perChange(num, old){
+    return (((num - old)/old)*100);
 }
 
 // assisted
@@ -59,7 +65,7 @@ function getNews() {
         return response.json();
     })
     .then(function (newsObj) {
-        // console.log(newsObj)
+        console.log(newsObj)
 
     })
 }
