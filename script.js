@@ -13,7 +13,7 @@ function stockTicker(){
 
 fetch(stockURL)
     .then(function (responce) {
-      return responce.json();
+        return responce.json();
 })
     .then(function (stockResults) {
         let tsdObj = stockResults['Time Series (Daily)'];
@@ -40,6 +40,7 @@ fetch(stockURL)
 } )
 }
 
+<<<<<<< HEAD
 function perChange(num, old){
     return (((num - old)/old)*100);
 }
@@ -56,6 +57,10 @@ $('#stock-btn').on('click',stockTicker)
 // })
 // stockTicker();
  
+=======
+stockTicker();
+
+>>>>>>> main
 
 function getNews() {
     let newsURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=dqDiEwjATABt4rNeLEmrYjgPHHj7nXd7";
