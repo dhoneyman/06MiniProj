@@ -1,4 +1,7 @@
-
+body {
+    background-color: #fcfa99;
+    color: #4b024b
+}
 
 input {
     border-radius: 5px;
