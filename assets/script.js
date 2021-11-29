@@ -18,18 +18,22 @@ function retrieveStorage(){
 }
 retrieveStorage();
 
+$('#stock-btn').on('click',stockTicker)
 
-function stockTicker(){
+function stockTicker(event){
+    event.preventDefault()
+    console.log('test');
     let stockSearch = document.querySelector('#stock-search').value;
     getStock(stockSearch);
 }
 
 function getStock(stockSearch){
     let stockURL = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSearch}&interval=5min&apikey=VZYUMVJFAC3AIYQG`;
-
+console.log(stockSearch);
     fetch(stockURL)
-        .then(function (responce) {
-        return responce.json();
+        .then(function (res) {
+            console.log(res)
+        return res.json();
     })
         .then(function (stockResults) {
             console.log(stockResults);
@@ -51,40 +55,6 @@ function getStock(stockSearch){
         })
 }
 
-
-function perChange(num, old){
-    return (((num - old)/old)*100);
-}
-
-// assisted
-$('#stock-btn').on('click',stockTicker)
-
-// let search = "tesco"
-// let apikey = "VZYUMVJFAC3AIYQG"
-// fetch("https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + search + "&apikey=" + apikey, {
-//   headers: {"User-Agent": "request"}
-// }).then(res => res.json()).then(data => {
-//   console.log(data)
-// })
-// stockTicker();
- 
-
-function getNews() {
-    let newsSearch = document.querySelector('#news-search').value;
-    let newsURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${newsSearch}&api-key=dqDiEwjATABt4rNeLEmrYjgPHHj7nXd7`;
-    
-    fetch(newsURL) 
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (newsObj) {
-        console.log(newsObj)
-
-    })
-}
-
-$('#news-button').on('click', getNews)
-
 parentDiv.addEventListener('click', function(event){
     let element = event.target;
     if (element.matches("button") === true){
@@ -99,6 +69,10 @@ parentDiv.addEventListener('click', function(event){
      }
 })
 
+function perChange(num, old){
+    return (((num - old)/old)*100);
+}
+
 function renderField (stockResults, currentIndex, yesterIndex){
     console.log(stockResults);
     return `<div class="result-1 stock-field field-1 " data-name='${stockResults}'>
@@ -112,6 +86,64 @@ function renderField (stockResults, currentIndex, yesterIndex){
     <p>Previous days closing Price: $${yesterIndex['1']["4. close"]}</p>
     <p>Percent Change: </p></div>`
     }
+
+ 
+
+function getNews(event) {
+    event.preventDefault()
+    let newsSearch = document.querySelector('#news-search').value;
+    let newsURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${newsSearch}&api-key=dqDiEwjATABt4rNeLEmrYjgPHHj7nXd7`;
+    
+    fetch(newsURL) 
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (newsObj) {
+        console.log(newsObj)
+        
+        let article1 = newsObj.response.docs[0];
+        let article2 = newsObj.response.docs[1];
+        let article3 = newsObj.response.docs[2];
+        let article4 = newsObj.response.docs[3];
+        $('#news-div').append(renderNews(newsObj, article1, article2, article3, article4))
+
+
+    })
+}
+
+function renderNews (newsObj, article1, article2, article3, article4){
+    return `<div class="result-1 stock-field field-1 ">
+    <div style='display:flex; justify-content:space-between'>
+        <h3 class= class="headline" style="display: block;">${article1.headline.main}</h3>
+    </div>
+    <p>${article1.abstract}</p>
+    <img src='https://nytimes.com/${article1.multimedia[19].url}'/>
+    </div>
+    <div class="result-1 stock-field field-1 ">
+    <div style='display:flex; justify-content:space-between'>
+        <h3 class= class="headline" style="display: block;">${article2.headline.main}</h3>
+    </div>
+    <p>${article2.abstract}</p>
+    <img src='https://nytimes.com/${article2.multimedia[19].url}'/>
+    </div>
+    <div class="result-1 stock-field field-1 ">
+    <div style='display:flex; justify-content:space-between'>
+        <h3 class= class="headline" style="display: block;">${article3.headline.main}</h3>
+    </div>
+    <p>${article3.abstract}</p>
+    </div>
+    <div class="result-1 stock-field field-1 ">
+    <div style='display:flex; justify-content:space-between'>
+        <h3 class= class="headline" style="display: block;">${article4.headline.main}</h3>
+    </div>
+    <p>${article4.abstract}</p>
+    </div>`
+}
+
+
+$('#news-btn').on('click', getNews)
+
+
 
 
 

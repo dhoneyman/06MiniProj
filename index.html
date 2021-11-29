@@ -4,33 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS only -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/style.css">
-    <title>MyDashboard</title>
 
 </head>
 <body>
-        <nav>
-            <h1>My Dashboard</h1>
-        </nav>
-        <form class="form-floating mb-3" style="width: 50%;" id="form-1">
-            <input type="search" class="form-control" id="'news-search'" placeholder="Search News">
-            <label for="floatingInput">Search News</label>
-            <button id='news-button' class="news-btn" style="display: inline;">Search</button>
-        </form>
-        <form class="form-floating mb-3" style="width: 35%;" id="form-2">
-            <input type="search" class="form-control" id="stock-search" placeholder="Search Stocks">
-            <label for="floatingInput">Search Stocks</label>
-            <button id="stock-btn" style="display: inline;">Search</button>
-        </form>
-        <div id='parent-div'></div>
-    <div id='color-switcher'>
-        <button id='dark'>dark mode</button>
+    <nav>
+        <h1>My Dashboard</h1><button id='dark'>dark mode</button>
+    </nav>
+    <div class="container">
+        <div class='row'>
+            <div class='col-sm'>
+                <form class="form-floating mb-3" style="width: 300px;" id="form-1">
+                    <input type="search" class="form-control" id="stock-search" placeholder="Search Stocks">
+                    <label for="floatingInput">Search Stocks</label>
+                    <button id="stock-btn" style="display: inline;">Search</button>
+                </form>
+                <div id='parent-div' class='column'>
+                </div>
+            </div>
+                <div class='col'>
+                    <form class="form-floating mb-3" style="width: 600px;" id="form-2">
+                        <input type="search" class="form-control" id="news-search" placeholder="Search News">
+                        <label for="floatingInput">Search News</label>
+                        <button id="news-btn" style="display: inline;">Search</button>
+                    </form>
+                    <div id='news-div'>
+                    </div>
+                </div>
+        </div>
     </div>
-    
+        
 
-<!-- JavaScript Bundle with Popper -->
+    
+    
+    <!-- JavaScript Bundle with Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="./assets/script.js"></script>
