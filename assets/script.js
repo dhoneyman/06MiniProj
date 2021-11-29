@@ -6,6 +6,7 @@ let prevClose = document.querySelector('.prev-close');
 let delta = document.querySelector('.per-change');
 let majDiv = document.querySelector('search-stocks');
 let parentDiv = document.querySelector('#parent-div');
+let stockNames;
 let count = 0;
 
 
@@ -38,11 +39,15 @@ function getStock(stockSearch){
             let yesterIndex = objArray[1];
             let stockName = stockResults['Meta Data']['2. Symbol'];
             $('#parent-div').prepend(renderField(stockResults, currentIndex, yesterIndex));
-            var stockNames = JSON.parse(localStorage.getItem('stockNames')) || [];
+            stockNames = JSON.parse(localStorage.getItem('stockNames')) || [];
+            //below statement needs to be able to look through stockNames subsiquent arrays. can it be done without a for loop?
             if(!stockNames.includes(stockName)){
+                // let stockData = [stockName, currentIndex['1']["1. open"], currentIndex['1']["4. close"], yesterIndex['1']["1. open"], yesterIndex['1']["4. close"]];
                 stockNames.push(stockName);
+                // stockNames.push(stockData);
                 localStorage.setItem('stockNames', JSON.stringify(stockNames));
             }
+            document.querySelector('#stock-search').value = '';
         })
 }
 
@@ -78,26 +83,26 @@ function getNews() {
 }
 getNews();
 
-$('#delete-btn').on('click', function(){
-    console.log('test');
-    console.log(selectedStock);
-    let selectedStock = $(this).attr('data-name'); 
-    localStorage.removeItem('selectedStock');
-    }
-);
-
-
-
-
-// parentDiv.addEventListener('click', function(event){
-//     let element = event.target;
+// $('#delete-btn').on('click', function(){
 //     console.log('test');
-//     if (element.matches("button") === true){
-//         console.log('test');
-//         var selectedStock = element.data('name');
-//         localStorage.removeItem('selectedStock');
+//     console.log(selectedStock);
+//     let selectedStock = $(this).attr('data-name'); 
+//     localStorage.removeItem('selectedStock');
 //     }
-// })
+// );
+
+
+
+
+parentDiv.addEventListener('click', function(event){
+    let element = event.target;
+    if (element.matches("button") === true){
+        var selectedStock = element.dataset.name;
+        let stockIndex = stockNames.findIndex(selectedStock);
+        stockNames.splice(stockIndex,1);
+        localStorage.setItem('stockNames');
+     }
+})
 
 function renderField (stockResults, currentIndex, yesterIndex){
     
