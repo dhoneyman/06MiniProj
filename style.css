@@ -1,9 +1,17 @@
-#form-1 {
-    margin-left: 320px;
+body {
+    background-color: antiquewhite;
+}
+
+.search-bars {
+    display: flex;
+}
+
+.form-floating {
+    display: flex;
 }
 
 #form-2 {
-    margin-top: -105px;
+    margin-left: 20px;
 }
 
 input {
@@ -62,7 +70,7 @@ input {
     margin-bottom: 10px;
 }
 
-.search-news {
+/* .search-news {
     margin-left: 300px;
     
-}
+} */
