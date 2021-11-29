@@ -6,6 +6,10 @@ let prevClose = document.querySelector('.prev-close');
 let delta = document.querySelector('.per-change');
 let majDiv = document.querySelector('search-stocks');
 let parentDiv = document.querySelector('#parent-div');
+let headline1 = document.querySelector("#headliner-title1");
+let headline2 = document.querySelector("#headliner-title2");
+let headline3 = document.querySelector("#headliner-title3");
+let headline4 = document.querySelector("#headliner-title4");
 let stockNames;
 let count = 0;
 
@@ -87,6 +91,33 @@ function renderField (stockResults, currentIndex, yesterIndex){
     <p>Percent Change: </p></div>`
     }
 
+    function headlines() {
+        let newsURL = "https://api.nytimes.com/svc/topstories/v2/world.json?api-key=dqDiEwjATABt4rNeLEmrYjgPHHj7nXd7";
+        fetch(newsURL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (newsResults) {
+            console.log(newsResults);
+            let a = document.createElement("a");
+            a.setAttribute("href", newsResults.results[1].url);
+            a.innerHTML= newsResults.results[1].title;
+            let b = document.createElement("a");
+            b.setAttribute("href" , newsResults.results[2].url);
+            b.innerHTML = newsResults.results[2].title;
+            let c = document.createElement("a");
+            c.setAttribute("href" , newsResults.results[3].url);
+            c.innerHTML = newsResults.results[3].title;
+            let d = document.createElement("a");
+            d.setAttribute("href" , newsResults.results[4].url);
+            d.innerHTML = newsResults.results[4].title;
+            headline1.append(a);
+            headline2.append(b);
+            headline3.append(c);
+            headline4.append(d);
+        })
+    }
+    headlines();
  
 
 function getNews(event) {
@@ -105,7 +136,8 @@ function getNews(event) {
         let article2 = newsObj.response.docs[1];
         let article3 = newsObj.response.docs[2];
         let article4 = newsObj.response.docs[3];
-        $('#news-div').append(renderNews(newsObj, article1, article2, article3, article4))
+        console.log(newsObj.response.docs[0].multimedia[17].url)
+        $('#news-div').prepend(renderNews(newsObj, article1, article2, article3, article4))
 
 
     })
@@ -160,3 +192,8 @@ $('#news-btn').on('click', getNews)
              isDark = !isDark;
          }
     });
+
+    $(document).ready(function () {
+    $("#date").text(moment().format("dddd, MMMM Do h:mma"));
+    console.log(date)
+})

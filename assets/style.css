@@ -2,6 +2,14 @@ body {
     background-color: #fcfa99;
     color: #4b024b;
 }
+
+.dashboard {
+    text-align: center;
+    background-color: transparent;
+    color: black;
+    border-radius: 0;
+    border-bottom: 10px solid black;
+}
 .search-bars {
     display: flex;
 }
