@@ -70,7 +70,8 @@ $('#stock-btn').on('click',stockTicker)
  
 
 function getNews() {
-    let newsURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=dqDiEwjATABt4rNeLEmrYjgPHHj7nXd7";
+    let newsSearch = document.querySelector('#news-search').value;
+    let newsURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${newsSearch}&api-key=dqDiEwjATABt4rNeLEmrYjgPHHj7nXd7`;
     
     fetch(newsURL) 
     .then(function (response) {
@@ -81,18 +82,8 @@ function getNews() {
 
     })
 }
-getNews();
 
-// $('#delete-btn').on('click', function(){
-//     console.log('test');
-//     console.log(selectedStock);
-//     let selectedStock = $(this).attr('data-name'); 
-//     localStorage.removeItem('selectedStock');
-//     }
-// );
-
-
-
+$('#news-button').on('click', getNews)
 
 parentDiv.addEventListener('click', function(event){
     let element = event.target;
@@ -104,6 +95,7 @@ parentDiv.addEventListener('click', function(event){
         console.log(stockIndex);
         stockNames.splice(stockIndex,1);
         localStorage.setItem('stockNames', JSON.stringify(stockNames));
+        location.reload();
      }
 })
 
