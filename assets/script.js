@@ -97,19 +97,22 @@ getNews();
 parentDiv.addEventListener('click', function(event){
     let element = event.target;
     if (element.matches("button") === true){
-        var selectedStock = element.dataset.name;
-        let stockIndex = stockNames.findIndex(selectedStock);
+        console.log(element);
+        let selectedStock = element.dataset.name;
+        // console.log(JSON.stringify(selectedStock));
+        let stockIndex = stockNames.findIndex((element) => element === selectedStock);
+        console.log(stockIndex);
         stockNames.splice(stockIndex,1);
-        localStorage.setItem('stockNames');
+        localStorage.setItem('stockNames', JSON.stringify(stockNames));
      }
 })
 
 function renderField (stockResults, currentIndex, yesterIndex){
-    
+    console.log(stockResults);
     return `<div class="result-1 stock-field field-1 " data-name='${stockResults}'>
     <div style='display:flex; justify-content:space-between'>
         <h2 class='stock-name' class="headline" style="display: block;">${stockResults['Meta Data']['2. Symbol']}</h2>
-        <button id='delete-btn' class='delete-btn' data-name='${stockResults}'>X</button>
+        <button id='delete-btn' class='delete-btn' data-name='${stockResults['Meta Data']['2. Symbol']}'>X</button>
     </div>
     <p>Yesterdays opening Price: $${currentIndex['1']["1. open"]}</p>
     <p>Yesterdays closing Price: $${currentIndex['1']["4. close"]}</p>    
