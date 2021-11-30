@@ -77,18 +77,26 @@ function perChange(num, old){
     return (((num - old)/old)*100);
 }
 
+function parse (input){
+   return parseFloat(input).toFixed(2);
+}
+
 function renderField (stockResults, currentIndex, yesterIndex){
     console.log(stockResults);
+    let yestPrice = parseFloat(currentIndex['1']["1. open"]);
+    console.log(yestPrice);
+    let yestPriceNew = yestPrice.toFixed(2);
+    console.log(yestPriceNew);
     return `<div class="result-1 stock-field field-1 " data-name='${stockResults}'>
     <div style='display:flex; justify-content:space-between'>
         <h2 class='stock-name' class="headline" style="display: block;">${stockResults['Meta Data']['2. Symbol']}</h2>
         <button id='delete-btn' class='delete-btn' data-name='${stockResults['Meta Data']['2. Symbol']}'>X</button>
     </div>
-    <p>Yesterdays opening Price: $${currentIndex['1']["1. open"]}</p>
-    <p>Yesterdays closing Price: $${currentIndex['1']["4. close"]}</p>    
-    <p>Previous days opening Price: $${yesterIndex['1']["1. open"]}</p>
-    <p>Previous days closing Price: $${yesterIndex['1']["4. close"]}</p>
-    <p>Percent Change: ${perChange(currentIndex['1']["1. open"],yesterIndex['1']["1. open"])}%</p></div>`
+    <p>Yesterdays opening Price: $${parse(currentIndex['1']["1. open"])}</p>
+    <p>Yesterdays closing Price: $${parse(currentIndex['1']["4. close"])}</p>    
+    <p>Previous days opening Price: $${parse(yesterIndex['1']["1. open"])}</p>
+    <p>Previous days closing Price: $${parse(yesterIndex['1']["4. close"])}</p>
+    <p>Percent Change: ${parse(perChange(currentIndex['1']["1. open"],yesterIndex['1']["1. open"]))}%</p></div>`
     }
 
     function headlines() {
@@ -144,6 +152,8 @@ function getNews(event) {
 }
 
 function renderNews (newsObj, article1, article2, article3, article4){
+    
+    
     return `<div class="result-1 stock-field field-1 ">
     <div style='display:flex; justify-content:space-between'>
         <h3 class= class="headline" style="display: block;"><a href='${article1.web_url}'>${article1.headline.main}</a></h3>
@@ -183,11 +193,14 @@ $('#news-btn').on('click', getNews)
     
     $('#dark').on('click', function(){
         if (isDark) {
-            $('body').css({ 'background-color': '#fcfa99', color: '#4b024b' });
+            $('body').css({ 'background-color': '#8EB1C7', color: '#38362E' });
+            $('a:link').css({color: '#FBB13C'});
+
             $(this).text('dark mode');
             isDark = !isDark;
         } else {
-             $('body').css({ 'background-color': '#634A4A', color: '#d9e9e8' });
+             $('body').css({ 'background-color': '#218380', color: '#FBB13C' });
+             $('a:link').css({color: '#8F2D56'});
              $(this).text('light mode');
              isDark = !isDark;
          }
