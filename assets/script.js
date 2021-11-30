@@ -88,7 +88,7 @@ function renderField (stockResults, currentIndex, yesterIndex){
     <p>Yesterdays closing Price: $${currentIndex['1']["4. close"]}</p>    
     <p>Previous days opening Price: $${yesterIndex['1']["1. open"]}</p>
     <p>Previous days closing Price: $${yesterIndex['1']["4. close"]}</p>
-    <p>Percent Change: </p></div>`
+    <p>Percent Change: ${perChange(currentIndex['1']["1. open"],yesterIndex['1']["1. open"])}%</p></div>`
     }
 
     function headlines() {
@@ -138,7 +138,7 @@ function getNews(event) {
         let article4 = newsObj.response.docs[3];
         console.log(newsObj.response.docs[0].multimedia[17].url)
         $('#news-div').prepend(renderNews(newsObj, article1, article2, article3, article4))
-
+        document.querySelector('#news-search').value = '';
 
     })
 }
@@ -146,27 +146,27 @@ function getNews(event) {
 function renderNews (newsObj, article1, article2, article3, article4){
     return `<div class="result-1 stock-field field-1 ">
     <div style='display:flex; justify-content:space-between'>
-        <h3 class= class="headline" style="display: block;">${article1.headline.main}</h3>
+        <h3 class= class="headline" style="display: block;"><a href='${article1.web_url}'>${article1.headline.main}</a></h3>
     </div>
     <p>${article1.abstract}</p>
     <img src='https://nytimes.com/${article1.multimedia[19].url}'/>
     </div>
     <div class="result-1 stock-field field-1 ">
     <div style='display:flex; justify-content:space-between'>
-        <h3 class= class="headline" style="display: block;">${article2.headline.main}</h3>
+        <h3 class= class="headline" style="display: block;"><a href='${article2.web_url}'>${article2.headline.main}</a></h3>
     </div>
     <p>${article2.abstract}</p>
     <img src='https://nytimes.com/${article2.multimedia[19].url}'/>
     </div>
     <div class="result-1 stock-field field-1 ">
     <div style='display:flex; justify-content:space-between'>
-        <h3 class= class="headline" style="display: block;">${article3.headline.main}</h3>
+        <h3 class= class="headline" style="display: block;"><a href='${article3.web_url}'>${article3.headline.main}</a></h3>
     </div>
     <p>${article3.abstract}</p>
     </div>
     <div class="result-1 stock-field field-1 ">
     <div style='display:flex; justify-content:space-between'>
-        <h3 class= class="headline" style="display: block;">${article4.headline.main}</h3>
+        <h3 class= class="headline" style="display: block;"><a href='${article4.web_url}'>${article4.headline.main}</a></h3>
     </div>
     <p>${article4.abstract}</p>
     </div>`
