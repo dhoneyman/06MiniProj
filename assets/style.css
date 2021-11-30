@@ -46,7 +46,8 @@ input {
     background-color: black;
 }
 .result-1 {
-    width: 300px;
+    text-align: center;
+    width: 450px;
     border: solid 2px;
     border-radius: 5px;
     padding: 10px;

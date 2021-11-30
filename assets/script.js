@@ -87,7 +87,7 @@ function renderField (stockResults, currentIndex, yesterIndex){
     console.log(yestPrice);
     let yestPriceNew = yestPrice.toFixed(2);
     console.log(yestPriceNew);
-    return `<div class="result-1 stock-field field-1 " data-name='${stockResults}'>
+    return `<div class="result-2 stock-field field-1 " data-name='${stockResults}'>
     <div style='display:flex; justify-content:space-between'>
         <h2 class='stock-name' class="headline" style="display: block;">${stockResults['Meta Data']['2. Symbol']}</h2>
         <button id='delete-btn' class='delete-btn' data-name='${stockResults['Meta Data']['2. Symbol']}'>X</button>
